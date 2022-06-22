@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DMZJ-ADBLOCKER
 // @namespace    https://manhua.dmzj.com/
-// @version      0.11
+// @version      0.12
 // @description  屏蔽冻鳗之家PC端广告
 // @author       ktcunreal
 // @match        https://manhua.dmzj.com/*
@@ -18,14 +18,20 @@
         element == null ? null : element.parentNode.removeChild(element);
     }
 
+    function removeElementsByClass(className){
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+      }
+    }
+
    window.onload =()=> {
     if (document.getElementsByClassName("ad_bottom_code")[0] != null) {
         document.getElementsByClassName("ad_bottom_code")[0].id= "btm-ad1";
         rmad("btm-ad1");
     }
     if (document.getElementsByClassName("ads-manhua")[0] != null) {
-        document.getElementsByClassName("ads-manhua")[0].id= "ads-manhua";
-        rmad("ads-manhua");
+        removeElementsByClass("ads-manhua")
     }
     if(document.getElementById("countdown") != null){
         document.getElementById("countdown").parentNode.id = "btm-ad2";
